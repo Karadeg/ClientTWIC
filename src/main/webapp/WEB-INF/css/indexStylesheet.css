@@ -1,0 +1,101 @@
+.container{
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	z-index:1;
+}
+.container .formulaire{
+	padding:50px;
+	position:relative;
+	width:auto;
+	height:auto;
+	box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+	border-radius:15px;
+	background:rgba(255,255,255,0.1);
+	overflow:hidden;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+	border-top:1px solid rgba(255,255,255,0.5);
+	border-left:1px solid rgba(255,255,255,0.5);
+	backdrop-filter:blur(5px);
+}
+.container .formulaire .login{
+	padding:20px;
+	align-items:center;
+	
+}
+input[type=text],
+input[type=password],
+input[type="date"],
+select{
+	width:300px;
+	border:0;
+	outline:none;
+	background:rgba(255,255,255,0.7);
+	padding:10px;
+	margin:15px 0;
+	transition:background 0.3s;
+}
+input[type=text]:hover,
+input[type=password]:hover,
+input[type="date"]:hover,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type="date"]:focus
+select:hover,
+select:focus{
+	background:rgba(255,255,255,1);
+	outline:none;
+}
+input[type=submit]{
+	position:relative;
+	left:calc(50% - 60px);
+	width:120px;
+	border:0;
+	font-size:1em;
+	border-radius:20px;
+	background:rgba(255,255,255,0.5);
+	padding: 10px 14px;
+	margin:15px 0;
+	cursor:pointer;
+	transition: all 0.3s;
+}
+a{
+	position:relative;
+	width:auto;
+	text-align:center;
+	border:0;
+	border-radius:20px;
+	background:rgba(255,255,255,0.5);
+	padding: 10px 14px;
+	cursor:pointer;
+	transition: all 0.3s;
+}
+input[type=submit]:hover, a:hover{
+	background:rgba(255,255,255,0.8);
+}
+.bouton-bas-page{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+
+@keyframes first-circle {
+  0% { clip-path:circle(20% at left 10%); }
+  20% { clip-path:circle(22% at 1% 11%); }
+  40% { clip-path:circle(21% at 2% 13%); }
+  60% { clip-path: circle(20% at 4% 12%); }
+  80% { clip-path:circle(19% at 1% 10%); }
+  100% { clip-path: circle(20% at left 9%); }
+}
+@keyframes second-circle {
+  0% { clip-path:circle(40% at 50% 90%); }
+  20% { clip-path:circle(42% at 47% 88%);}
+  40% { clip-path: circle(44% at 46% 86%); }
+  60% { clip-path:circle(43% at 49% 85%); }
+  80% { clip-path:circle(41% at 51% 87%);}
+  100% { clip-path: circle(40% at 52% 88%); }
+}

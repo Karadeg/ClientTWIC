@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID"
+    version="3.0">
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>com.octest.servlets.Index</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AfficherVille</servlet-name>
+        <servlet-class>com.octest.servlets.AfficherVille</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AjouterVille</servlet-name>
+        <servlet-class>com.octest.servlets.AjouterVille</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>CalculerDistance</servlet-name>
+        <servlet-class>com.octest.servlets.CalculerDistance</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ModifierVille</servlet-name>
+        <servlet-class>com.octest.servlets.ModifierVille</servlet-class>
+    </servlet>
+    <!-- <servlet-mapping>
+        <servlet-name>ModifierVille</servlet-name>
+        <url-pattern>/modifierVille</url-pattern>
+    </servlet-mapping> -->
+    
+    <filter>
+	  <filter-name>CorsFilter</filter-name>
+	  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	  <filter-name>CorsFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping> 
+</web-app>

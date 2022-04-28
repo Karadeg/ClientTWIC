@@ -1,0 +1,176 @@
+package com.octest.api;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import com.google.gson.Gson;
+import com.octest.beans.Ville;
+
+public class APIRequest {
+	private static final String URL = "http://localhost:8181/ville";
+	private static final String ERROR_CODE = "Failed with HTTP error code : ";
+
+	public APIRequest() {
+		// Do nothing.
+	}
+
+	public String APIGet(String parameter) {
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		String apiOutput = null;
+		try {
+			HttpGet getRequest = new HttpGet(URL+parameter);
+			
+			HttpResponse responseAPI = httpClient.execute(getRequest);
+
+			int statusCode = responseAPI.getStatusLine().getStatusCode();
+			if (statusCode != 200) {
+				throw new RuntimeException(ERROR_CODE + statusCode);
+			}
+
+			HttpEntity httpEntity = responseAPI.getEntity();
+			apiOutput = EntityUtils.toString(httpEntity);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// Important: Close the connect
+			httpClient.getConnectionManager().shutdown();
+		}
+		return apiOutput;
+	}
+
+	public HttpResponse APIPost(HttpServletRequest request) {
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		HttpResponse response = null;
+
+		Ville ville = new Ville();
+		ville.setCode_commune_INSEE(Integer.parseInt(request.getParameter("codeCommuneINSEE")));
+		ville.setNom_commune(request.getParameter("nomCommune"));
+		ville.setCode_postal(Integer.parseInt(request.getParameter("codePostal")));
+		ville.setLibelle_acheminement(request.getParameter("libelleAcheminement"));
+		ville.setLigne_5(request.getParameter("ligne5"));
+		ville.setLatitude(request.getParameter("latitude"));
+		ville.setLongitude(request.getParameter("longitude"));
+
+		String json = new Gson().toJson(ville);
+
+		try {
+			// Define a postRequest request
+			HttpPost postRequest = new HttpPost("URL");
+
+			// Set the API media type in http content-type header
+			postRequest.addHeader("content-type", "application/xml");
+
+			// Set the request post body
+			StringEntity userEntity = null;
+			try {
+				userEntity = new StringEntity(json);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			postRequest.setEntity(userEntity);
+
+			// Send the request; It will immediately return the response in HttpResponse
+			// object if any
+			try {
+				response = httpClient.execute(postRequest);
+				
+				int statusCode = response.getStatusLine().getStatusCode();
+				if (statusCode != 200 && statusCode != 201) {
+					throw new RuntimeException(ERROR_CODE + statusCode);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			httpClient.getConnectionManager().shutdown();
+		}
+		return response;
+	}
+
+	public HttpResponse APIPut(HttpServletRequest request) {
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		HttpResponse response = null;
+
+		Ville villePrevious = new Ville();
+		Ville ville = new Ville();
+		ville.setCode_commune_INSEE(Integer.parseInt(request.getParameter("codeCommuneINSEE")));
+		ville.setNom_commune(request.getParameter("nomCommune"));
+		ville.setCode_postal(Integer.parseInt(request.getParameter("codePostal")));
+		ville.setLibelle_acheminement(request.getParameter("libelleAcheminement"));
+		ville.setLigne_5(request.getParameter("ligne5"));
+		ville.setLatitude(request.getParameter("latitude"));
+		ville.setLongitude(request.getParameter("longitude"));
+		villePrevious.setCode_commune_INSEE(Integer.parseInt(request.getParameter("codeCommuneINSEEPrevious")));
+		
+		String json1 = new Gson().toJson(villePrevious);
+		String json2 = new Gson().toJson(ville);
+		String json = "["+json1+","+json2+"]";
+
+		try {
+			// Define a postRequest request
+			HttpPut putRequest = new HttpPut(URL);
+
+			// Set the API media type in http content-type header
+			putRequest.addHeader("content-type", "application/xml");
+
+			// Set the request post body
+			StringEntity userEntity = null;
+			try {
+				userEntity = new StringEntity(json);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			putRequest.setEntity(userEntity);
+
+			// Send the request; It will immediately return the response in HttpResponse
+			// object if any
+			try {
+				response = httpClient.execute(putRequest);
+				
+				int statusCode = response.getStatusLine().getStatusCode();
+				if (statusCode != 200 && statusCode != 201) {
+					throw new RuntimeException(ERROR_CODE + statusCode);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			httpClient.getConnectionManager().shutdown();
+		}
+		return response;
+	}
+
+	public void APIDelete(String parameter) {
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		try {
+			HttpDelete deleteRequest = new HttpDelete(URL+parameter);
+
+			HttpResponse responseAPI = httpClient.execute(deleteRequest);
+
+			// verify the valid error code first
+			int statusCode = responseAPI.getStatusLine().getStatusCode();
+			if (statusCode != 200) {
+				throw new RuntimeException(ERROR_CODE + statusCode);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// Important: Close the connect
+			httpClient.getConnectionManager().shutdown();
+		}
+	}
+}
