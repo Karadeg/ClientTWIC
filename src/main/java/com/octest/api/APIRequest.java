@@ -56,24 +56,21 @@ public class APIRequest {
 		HttpResponse response = null;
 
 		Ville ville = new Ville();
-		ville.setCode_commune_INSEE(Integer.parseInt(request.getParameter("codeCommuneINSEE")));
-		ville.setNom_commune(request.getParameter("nomCommune"));
-		ville.setCode_postal(Integer.parseInt(request.getParameter("codePostal")));
-		ville.setLibelle_acheminement(request.getParameter("libelleAcheminement"));
-		ville.setLigne_5(request.getParameter("ligne5"));
+		ville.setCodeCommuneINSEE(Integer.parseInt(request.getParameter("codeCommuneINSEE")));
+		ville.setNomCommune(request.getParameter("nomCommune"));
+		ville.setCodePostal(Integer.parseInt(request.getParameter("codePostal")));
+		ville.setLibelleAcheminement(request.getParameter("libelleAcheminement"));
+		ville.setLigne5(request.getParameter("ligne5"));
 		ville.setLatitude(request.getParameter("latitude"));
 		ville.setLongitude(request.getParameter("longitude"));
 
 		String json = new Gson().toJson(ville);
 
 		try {
-			// Define a postRequest request
-			HttpPost postRequest = new HttpPost("URL");
+			HttpPost postRequest = new HttpPost(URL);
 
-			// Set the API media type in http content-type header
 			postRequest.addHeader("content-type", "application/xml");
 
-			// Set the request post body
 			StringEntity userEntity = null;
 			try {
 				userEntity = new StringEntity(json);
@@ -81,9 +78,7 @@ public class APIRequest {
 				e.printStackTrace();
 			}
 			postRequest.setEntity(userEntity);
-
-			// Send the request; It will immediately return the response in HttpResponse
-			// object if any
+			
 			try {
 				response = httpClient.execute(postRequest);
 				
@@ -106,27 +101,22 @@ public class APIRequest {
 
 		Ville villePrevious = new Ville();
 		Ville ville = new Ville();
-		ville.setCode_commune_INSEE(Integer.parseInt(request.getParameter("codeCommuneINSEE")));
-		ville.setNom_commune(request.getParameter("nomCommune"));
-		ville.setCode_postal(Integer.parseInt(request.getParameter("codePostal")));
-		ville.setLibelle_acheminement(request.getParameter("libelleAcheminement"));
-		ville.setLigne_5(request.getParameter("ligne5"));
+		ville.setCodeCommuneINSEE(Integer.parseInt(request.getParameter("codeCommuneINSEE")));
+		ville.setNomCommune(request.getParameter("nomCommune"));
+		ville.setCodePostal(Integer.parseInt(request.getParameter("codePostal")));
+		ville.setLibelleAcheminement(request.getParameter("libelleAcheminement"));
+		ville.setLigne5(request.getParameter("ligne5"));
 		ville.setLatitude(request.getParameter("latitude"));
 		ville.setLongitude(request.getParameter("longitude"));
-		villePrevious.setCode_commune_INSEE(Integer.parseInt(request.getParameter("codeCommuneINSEEPrevious")));
+		villePrevious.setCodeCommuneINSEE(Integer.parseInt(request.getParameter("codeCommuneINSEEPrevious")));
 		
 		String json1 = new Gson().toJson(villePrevious);
 		String json2 = new Gson().toJson(ville);
 		String json = "["+json1+","+json2+"]";
 
 		try {
-			// Define a postRequest request
 			HttpPut putRequest = new HttpPut(URL);
-
-			// Set the API media type in http content-type header
 			putRequest.addHeader("content-type", "application/xml");
-
-			// Set the request post body
 			StringEntity userEntity = null;
 			try {
 				userEntity = new StringEntity(json);
@@ -134,9 +124,6 @@ public class APIRequest {
 				e.printStackTrace();
 			}
 			putRequest.setEntity(userEntity);
-
-			// Send the request; It will immediately return the response in HttpResponse
-			// object if any
 			try {
 				response = httpClient.execute(putRequest);
 				
@@ -156,14 +143,14 @@ public class APIRequest {
 	public void APIDelete(String parameter) {
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		try {
-			HttpDelete deleteRequest = new HttpDelete(URL+parameter);
+			HttpDelete deleteRequest = new HttpDelete(URL+"/"+parameter);
 
 			HttpResponse responseAPI = httpClient.execute(deleteRequest);
 
 			// verify the valid error code first
 			int statusCode = responseAPI.getStatusLine().getStatusCode();
-			if (statusCode != 200) {
-				throw new RuntimeException(ERROR_CODE + statusCode);
+			if (statusCode != 200 || statusCode != 201) {
+				//DO nothing
 			}
 
 		} catch (IOException e) {

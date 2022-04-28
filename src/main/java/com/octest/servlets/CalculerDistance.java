@@ -25,7 +25,6 @@ public class CalculerDistance extends HttpServlet {
      */
     public CalculerDistance() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -51,8 +50,8 @@ public class CalculerDistance extends HttpServlet {
 		request.setAttribute("villes", session.getAttribute("villes"));
 		Ville ville1 = trouverVille(request.getParameter("ville1"));
 		Ville ville2 = trouverVille(request.getParameter("ville2"));
-		request.setAttribute("nom1", ville1.getNom_commune());
-		request.setAttribute("nom2", ville2.getNom_commune());
+		request.setAttribute("nom1", ville1.getNomCommune());
+		request.setAttribute("nom2", ville2.getNomCommune());
 		request.setAttribute("distance", ville1.calculDistance(ville2));
 		this.getServletContext().getRequestDispatcher("/WEB-INF/calculerDistance.jsp").forward(request, response);
 	}
@@ -62,7 +61,7 @@ public class CalculerDistance extends HttpServlet {
 		System.out.println(selectedVille);
 		List<Ville> villes = ((List<Ville>) session.getAttribute("villes"));
 		for (int i = 0; i < villes.size(); i ++) {
-			if (Integer.toString(villes.get(i).getCode_commune_INSEE()).equals(selectedVille)) {
+			if (Integer.toString(villes.get(i).getCodeCommuneINSEE()).equals(selectedVille)) {
 				ville = villes.get(i);
 			}
 		}

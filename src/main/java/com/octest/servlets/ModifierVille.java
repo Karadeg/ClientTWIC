@@ -54,7 +54,7 @@ public class ModifierVille extends HttpServlet {
 		List<Ville> villes = (List<Ville>) session.getAttribute("villes");
 		System.out.println(selectedVille);
 		for (int i = 0; i < villes.size(); i ++) {
-			if (Integer.toString(villes.get(i).getCode_commune_INSEE()).equals(selectedVille)) {
+			if (Integer.toString(villes.get(i).getCodeCommuneINSEE()).equals(selectedVille)) {
 				ville = villes.get(i);
 			}
 		}

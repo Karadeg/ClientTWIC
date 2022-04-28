@@ -46,7 +46,7 @@ public class AfficherVille extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		request.setAttribute("json", json);
 		request.setAttribute("villes", villes);
 		try {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/afficherVille.jsp").forward(request, response);
@@ -63,7 +63,7 @@ public class AfficherVille extends HttpServlet {
 		List<Ville> villes;
 		if (request.getParameter("modifier") != null || request.getParameter("supprimer") != null) {
 			if (request.getParameter("supprimer") != null) {
-				apiRequest.APIDelete("Code_commune_INSEE="+request.getParameter("codeCommuneINSEE"));
+				apiRequest.APIDelete(request.getParameter("codeCommuneINSEE"));
 			} else if (request.getParameter("modifier") != null) {
 				HttpResponse responsePUT = apiRequest.APIPut(request);
 				HttpEntity entity = responsePUT.getEntity();

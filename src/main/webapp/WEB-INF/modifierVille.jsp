@@ -9,24 +9,24 @@
 </head>
 <body>
 	<a href="index">Accueil</a>
-	<h1>Modifier les données de <c:out value="${ ville.getNom_commune() }"/></h1>
+	<h1>Modifier les données de <c:out value="${ ville.getNomCommune() }"/></h1>
 	<form id="update" class="formulaire" method="post" action="afficherVille" name="myForm">
 		<input type="hidden" name="modifier" value="1"/>
-		<input type="hidden" name="codeCommuneINSEEPrevious" value="${ ville.getCode_commune_INSEE() }"/>
+		<input type="hidden" name="codeCommuneINSEEPrevious" value="${ ville.getCodeCommuneINSEE() }"/>
 		<label for="nomCommune">Nom de la Commune</label><br>
-		<input id="nomCommune" type="text" required name="nomCommune" value="${ ville.getNom_commune() }"/><br>
+		<input id="nomCommune" type="text" required name="nomCommune" value="${ ville.getNomCommune() }"/><br>
 		
 		<label for="codeCommuneINSEE">Code commune INSEE</label><br>
-		<input id="codeCommuneINSEE" type="text" required name="codeCommuneINSEE" value="${ ville.getCode_commune_INSEE() }"/><br>
+		<input id="codeCommuneINSEE" type="text" required name="codeCommuneINSEE" value="${ ville.getCodeCommuneINSEE() }"/><br>
 		
 		<label for="codePostal">Code postal</label><br>
-		<input id="codePostal" type="text" required name="codePostal" value="${ ville.getCode_postal() }"/><br>
+		<input id="codePostal" type="text" required name="codePostal" value="${ ville.getCodePostal() }"/><br>
 		
 		<label for="libelleAcheminement">Libellé acheminement</label><br>
-		<input id="libelleAcheminement" type="text" name="libelleAcheminement" value="${ ville.getLibelle_acheminement() }"/><br>
+		<input id="libelleAcheminement" type="text" name="libelleAcheminement" value="${ ville.getLibelleAcheminement() }"/><br>
 		
 		<label for="ligne5">Ligne 5</label><br>
-		<input id="ligne5" type="text" name="ligne5" value="${ ville.getLigne_5() }"/><br>
+		<input id="ligne5" type="text" name="ligne5" value="${ ville.getLigne5() }"/><br>
 		
 		<label for="latitude">Latitude</label><br>
 		<input type="number"  step=any required name="latitude" value="${ ville.getLatitude() }"/><br>
@@ -38,7 +38,7 @@
 	</form>
 	<form name="delete" action="afficherVille" method="post">
 	<input type="hidden" name="supprimer" value="1"/>
-		<input type="hidden" name="codeCommuneINSEE" value="${ ville.getCode_commune_INSEE() }"/>
+		<input type="hidden" name="codeCommuneINSEE" value="${ ville.getCodeCommuneINSEE() }"/>
 		<input type="submit" value="Supprimer"/>
 	</form>
 </body>

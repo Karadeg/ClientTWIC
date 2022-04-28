@@ -5,30 +5,32 @@ import java.text.NumberFormat;
 import java.util.Objects;
 
 public class Ville {
-    private int Code_commune_INSEE;
-    private String Nom_commune;
-    private int Code_postal;
-    private String Libelle_acheminement;
-    private String Ligne_5;
-    private String Latitude;
-    private String Longitude;
+	private int codeCommuneINSEE;
+    private String nomCommune;
+    private int codePostal;
+    private String libelleAcheminement;
+    private String ligne5;
+    private String latitude;
+    private String longitude;
 
-    public Ville(){}
+    public Ville(){
+    	//Nothing to do
+    }
 
     public String toString() {
         return "{" +
-                "\"Code_commune_INSEE\": \"" + Code_commune_INSEE +
-                "\", \"Nom_commune\": \"" + Nom_commune + '\"' +
-                ", \"Code_postal\": \"" + Code_postal + '\"' +
-                ", \"Libelle_acheminement\": \"" + Libelle_acheminement + '\"' +
-                ", \"Ligne_5\": \"" + Ligne_5 + '\"' +
-                ", \"Latitude\": \"" + Latitude +
-                "\", \"Longitude\": \"" + Longitude +
+                "\"Code_commune_INSEE\": \"" + codeCommuneINSEE +
+                "\", \"Nom_commune\": \"" + nomCommune + '\"' +
+                ", \"Code_postal\": \"" + codePostal + '\"' +
+                ", \"Libelle_acheminement\": \"" + libelleAcheminement + '\"' +
+                ", \"Ligne_5\": \"" + ligne5 + '\"' +
+                ", \"Latitude\": \"" + latitude +
+                "\", \"Longitude\": \"" + longitude +
                 "\"}";
     }
     public String toStringSelect() {
-    	return ""+Nom_commune+
-    			"\""+Code_commune_INSEE;
+    	return ""+nomCommune+
+    			"\""+codeCommuneINSEE;
     }
     
     public String calculDistance(Ville ville) {
@@ -41,68 +43,62 @@ public class Ville {
     	String format = "0.00";
         NumberFormat formatter = new DecimalFormat(format);  
         String distanceString = formatter.format(distance);
-    	System.out.println(distance);
     	return distanceString;
     }
 
-    public int getCode_commune_INSEE() {
-		return Code_commune_INSEE;
+    public int getCodeCommuneINSEE() {
+		return codeCommuneINSEE;
 	}
 
-	public void setCode_commune_INSEE(int code_commune_INSEE) {
-		Code_commune_INSEE = code_commune_INSEE;
+	public void setCodeCommuneINSEE(int codeCommuneINSEE) {
+		this.codeCommuneINSEE = codeCommuneINSEE;
 	}
 
-	public String getNom_commune() {
-		return Nom_commune;
+	public String getNomCommune() {
+		return nomCommune;
 	}
 
-	public void setNom_commune(String nom_commune) {
-		Nom_commune = nom_commune;
+	public void setNomCommune(String nomCommune) {
+		this.nomCommune = nomCommune;
 	}
 
-	public int getCode_postal() {
-		return Code_postal;
+	public int getCodePostal() {
+		return codePostal;
 	}
 
-	public void setCode_postal(int code_postal) {
-		Code_postal = code_postal;
+	public void setCodePostal(int codePostal) {
+		this.codePostal = codePostal;
 	}
 
-	public String getLibelle_acheminement() {
-		return Libelle_acheminement;
+	public String getLibelleAcheminement() {
+		return libelleAcheminement;
 	}
 
-	public void setLibelle_acheminement(String libelle_acheminement) {
-		Libelle_acheminement = libelle_acheminement;
+	public void setLibelleAcheminement(String libelleAcheminement) {
+		this.libelleAcheminement = libelleAcheminement;
 	}
 
-	public String getLigne_5() {
-		return Ligne_5;
+	public String getLigne5() {
+		return ligne5;
 	}
 
-	public void setLigne_5(String ligne_5) {
-		Ligne_5 = ligne_5;
+	public void setLigne5(String ligne5) {
+		this.ligne5 = ligne5;
 	}
 
 	public String getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 	public void setLatitude(String latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 
 	public String getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public void setLongitude(String longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.getCode_commune_INSEE(), this.getNom_commune(), this.getCode_postal(), this.getLibelle_acheminement(), this.getLigne_5(), this.getLatitude(), this.getLongitude());
-    }
 }

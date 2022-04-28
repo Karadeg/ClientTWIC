@@ -14,12 +14,12 @@
 		<form name="distanceCalculator" action="calculerDistance" method="post">
 			<select name="ville1" id="ville1">
 				<c:forEach var="i" begin="1" end="${villes.size()}">
-					<option value="${ villes.get(i-1).getCode_commune_INSEE() }"/><c:out value="${ villes.get(i-1).getNom_commune() }"/></option>
+					<option value="${ villes.get(i-1).getCodeCommuneINSEE() }"/><c:out value="${ villes.get(i-1).getNomCommune() }"/></option>
 				</c:forEach>
 			</select>
 			<select name="ville2" id="ville2">
 				<c:forEach var="i" begin="1" end="${villes.size()}">
-					<option value="${ villes.get(i-1).getCode_commune_INSEE() }"/><c:out value="${ villes.get(i-1).getNom_commune() }"/></option>
+					<option value="${ villes.get(i-1).getCodeCommuneINSEE() }"/><c:out value="${ villes.get(i-1).getNomCommune() }"/></option>
 				</c:forEach>
 			</select>
 			<input type="submit" value="Calculer"/>

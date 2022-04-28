@@ -42,7 +42,7 @@ public class Index extends HttpServlet {
 		String json = apiRequest.APIGet("");
 		
 		villes = new Gson().fromJson(json, new TypeToken<List<Ville>>() {}.getType());
-		System.out.println("Ville : "+villes.get(0).getNom_commune());
+		System.out.println("Ville : "+villes.get(0).getNomCommune());
 		System.out.println(villes.size());
 		session.setAttribute("villes", villes);
 		

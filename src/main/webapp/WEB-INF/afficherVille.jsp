@@ -2,8 +2,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
-<style type="text/css"><%@include file="css/stylesheet.css"%></style>
 <style type="text/css"><%@include file="css/afficherVilleStylesheet.css"%></style>
+<style type="text/css"><%@include file="css/stylesheet.css"%></style>
 <head>
 <meta charset="UTF-8">
 <title>Ville de France</title>
@@ -27,13 +27,13 @@
 					<c:forEach var="i" begin="1" end="${villes.size()}">
 						<tr class="hidden">
 							<td><c:out value="${ i }"/></td>
-							<td><c:out value="${ villes.get(i-1).getNom_commune() }"/></td>
-							<td><c:out value="${ villes.get(i-1).getCode_postal() }"/></td>
+							<td><c:out value="${ villes.get(i-1).getNomCommune() }"/></td>
+							<td><c:out value="${ villes.get(i-1).getCodePostal() }"/></td>
 							<td><c:out value="${ villes.get(i-1).getLatitude() }"/></td>
 							<td><c:out value="${ villes.get(i-1).getLongitude() }"/></td>
 							<td>
 								<form action="modifierVille" method="post">
-									<input name="ville" type="hidden" value="${ villes.get(i-1).getCode_commune_INSEE() }"/>
+									<input name="ville" type="hidden" value="${ villes.get(i-1).getCodeCommuneINSEE() }"/>
 									<input type="submit" value="Modifier"/>
 								</form>
 							</td>
